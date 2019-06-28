@@ -11,32 +11,49 @@ var guessesSoFarText = document.getElementById("guesses-so-far");
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
-var userLetterText = [];
-var pcLetterText = [];
+var incorrectGuesses = [];
+// var pcLetterText = [];
 
-document.onkeyup = function(event) {
-        
+
+var pcChoice = pcLetter[Math.floor(Math.random() * pcLetter.length)];
+console.log(pcChoice)
+
+document.onkeyup = function (event) {
+
         var userLetter = event.key.toLowerCase();
-        var pcChoice = pcLetter[Math.floor(Math.random() * pcLetter.length)];
-        console.log(pcChoice)
-        for (var i = 0; i < 10  ; i++) {
-                ;
-        }
-        
-        if (userLetter === pcLetter) {
-        winsText++;
-        winsText.textContent = wins;
+
+        // for (var i = 0; i < pcLetter.length ; i++) {
+        //         pcLetterText = pcLetter[i];
+        // }
+
+        if (userLetter === pcChoice) {
+                wins++;
+                winsText.textContent = wins;
+                guessesLeft = 9;
+                guessesLeftText.textContent = guessesLeft;
+                incorrectGuesses = [];
+                guessesSoFarText.textContent = incorrectGuesses.join(", ");
+                pcChoice = pcLetter[Math.floor(Math.random() * pcLetter.length)];
+                console.log(pcChoice);
         } else {
-        guessesLeft--;
-        guessesLeftText.textContent = guessesLeft;
-        } 
+                guessesLeft--;
+                guessesLeftText.textContent = guessesLeft;
+                incorrectGuesses.push(userLetter);
+                guessesSoFarText.textContent = incorrectGuesses.join(", ");
+        }
 
         if (guessesLeft === 0) {
-        losses++;
-        lossesText.textContent = losses;
-        ;
+                losses++;
+                lossesText.textContent = losses;
+                guessesLeft = 9;
+                guessesLeftText.textContent = guessesLeft;
+                incorrectGuesses = [];
+                guessesSoFarText.textContent = incorrectGuesses.join(", ");
+                pcChoice = pcLetter[Math.floor(Math.random() * pcLetter.length)];
+                console.log(pcChoice);
         }
-        userLetter.textContent = guessesSoFarText            
-        userLetterText.textContent = userLetter
-        pcLetterText.textContent = pcChoice
+
+        // userLetter.textContent = guessesSoFarText            
+        // userLetterText.textContent = userLetter
+        // pcLetterText.textContent = pcChoice
 }
