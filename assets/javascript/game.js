@@ -1,7 +1,7 @@
 // -----------------
 
 var pcLetter = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-for (var i = 0; i < pcLetter.length; i++)
+
 
 // Global Variables
 var winsText = document.getElementById("wins");
@@ -15,21 +15,28 @@ var userLetterText = [];
 var pcLetterText = [];
 
 document.onkeyup = function(event) {
-
+        
         var userLetter = event.key.toLowerCase();
         var pcChoice = pcLetter[Math.floor(Math.random() * pcLetter.length)];
+        console.log(pcChoice)
+        for (var i = 0; i < 10  ; i++) {
+                ;
+        }
         
-        if (userLetter === pcChoice) {
+        if (userLetter === pcLetter) {
         winsText++;
         winsText.textContent = wins;
-        return;
         } else {
-        losses++;
-        lossesText.textContent = losses;
         guessesLeft--;
         guessesLeftText.textContent = guessesLeft;
         } 
-            
-        userLetterText.textContent = userGuess
+
+        if (guessesLeft === 0) {
+        losses++;
+        lossesText.textContent = losses;
+        ;
+        }
+        userLetter.textContent = guessesSoFarText            
+        userLetterText.textContent = userLetter
         pcLetterText.textContent = pcChoice
 }
